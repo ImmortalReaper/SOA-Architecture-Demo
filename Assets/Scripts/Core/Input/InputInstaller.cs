@@ -12,8 +12,7 @@ internal class InputInstaller : ScriptableObjectInstaller
         Container.Bind<InputActionAsset>()
             .FromInstance(_inputActionAsset)
             .AsSingle();
-
-        Container.Bind<IInputBlockerService>().To<InputBlockerService>().AsSingle();
+        
         Container.BindInterfacesAndSelfTo<InputService>().AsSingle();
     }
 }

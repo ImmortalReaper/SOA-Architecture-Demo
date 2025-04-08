@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using Zenject;
 
@@ -9,13 +11,12 @@ public class InputService : IInputService, IInitializable, IDisposable
     private const string INPUT_POSITION_ACTION = "InputPosition";
     private readonly InputActionAsset _inputActions;
     private InputAction _interactionAction;
-    private IInputBlockerService _inputBlockerService;
+    
     public event Action<Vector2> OnInputPositionPerformed;
 
-    public InputService(InputActionAsset inputActionAsset, IInputBlockerService inputBlockerService)
+    public InputService(InputActionAsset inputActionAsset)
     {
         _inputActions = inputActionAsset;
-        _inputBlockerService = inputBlockerService;
     }
 
     public void Initialize() 
@@ -32,9 +33,20 @@ public class InputService : IInputService, IInitializable, IDisposable
         _interactionAction.performed -= OnInputPosition;
     }
     
+    private bool IsPointerOverUI(Vector2 screenPosition)
+    {
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = screenPosition;
+
+        var results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+
+        return results.Count > 0;
+    }
+    
     public void OnInputPosition(InputAction.CallbackContext context) 
     {
-        if(_inputBlockerService.IsInputBlocked)
+        if(IsPointerOverUI(Pointer.current.position.ReadValue()))
             return;
         
         if (context.performed)
