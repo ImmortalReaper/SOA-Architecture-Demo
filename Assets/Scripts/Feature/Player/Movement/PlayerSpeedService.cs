@@ -10,6 +10,9 @@ public class PlayerSpeedService : IPlayerSpeedService
 
     public void SetPlayerSpeed(float playerSpeed)
     {
+        if(_playerEntityModel.PlayerEntity == null)
+            return;
+        
         _playerMovement ??= _playerEntityModel.PlayerEntity.GetComponent<PlayerMovement>();
         _playerMovement.SetPlayerSpeed(playerSpeed);
     }
