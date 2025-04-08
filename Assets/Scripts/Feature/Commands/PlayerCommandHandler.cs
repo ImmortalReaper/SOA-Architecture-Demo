@@ -23,6 +23,9 @@ public class PlayerCommandHandler : IInitializable, IDisposable
     
     private void OnClick(Vector2 screenPos)
     {
+        if(_playerEntityModel.PlayerEntity == null)
+            return;
+        
         if(_playerEntityModel.PlayerEntity.TryGetComponent(out PlayerMovement playerMovement))
             _commandQueue.Enqueue(new MoveCommand(playerMovement, screenPos));
     }
