@@ -1,10 +1,13 @@
 using Zenject;
 
-public abstract class Installer<TDerived> : InstallerBase
-    where TDerived : Installer<TDerived>
+namespace Core.Installer
 {
-    public static void Install(DiContainer container)
+    public abstract class Installer<TDerived> : InstallerBase
+        where TDerived : Installer<TDerived>
     {
-        container.Instantiate<TDerived>().InstallBindings();
+        public static void Install(DiContainer container)
+        {
+            container.Instantiate<TDerived>().InstallBindings();
+        }
     }
 }

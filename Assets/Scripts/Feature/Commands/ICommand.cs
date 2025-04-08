@@ -1,8 +1,11 @@
 using System;
 
-public interface ICommand
+namespace Feature.Commands
 {
-    public bool CommandExecuted { get; }
-    public void Execute();
-    public event Action OnCompleted; 
+    public interface ICommand
+    {
+        public bool CommandExecuted { get; }
+        public void Execute();
+        public event Action OnCompleted; 
+    }
 }

@@ -1,13 +1,19 @@
+using Core.PrefabFactory;
+using Feature.Commands;
+using Feature.PlayerData;
 using UnityEngine;
 using Zenject;
 
-[CreateAssetMenu(fileName = "GameplayBootsrap", menuName = "Installers/GameplayBootsrap")]
-public class GameplayBootsrap : ScriptableObjectInstaller<GameplayBootsrap>
+namespace Bootstraps
 {
-    public override void InstallBindings()
+    [CreateAssetMenu(fileName = "GameplayBootsrap", menuName = "Installers/GameplayBootsrap")]
+    public class GameplayBootsrap : ScriptableObjectInstaller<GameplayBootsrap>
     {
-        PrefabFactoryInstaller.Install(Container);
-        PlayerDataInstaller.Install(Container);
-        CommandModuleInstaller.Install(Container);
+        public override void InstallBindings()
+        {
+            PrefabFactoryInstaller.Install(Container);
+            PlayerDataInstaller.Install(Container);
+            CommandModuleInstaller.Install(Container);
+        }
     }
 }

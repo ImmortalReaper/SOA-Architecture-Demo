@@ -1,7 +1,10 @@
 using System;
 using UnityEngine;
 
-public interface IInputService
+namespace Core.Input
 {
-    public event Action<Vector2> OnInputPositionPerformed;
+    public interface IInputService
+    {
+        public event Action<Vector2> OnInputPositionPerformed;
+    }
 }

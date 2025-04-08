@@ -1,7 +1,12 @@
-public class AdressablesAssetLoaderInstaller : Installer<AdressablesAssetLoaderInstaller>
+using Core.Installer;
+
+namespace Core.AssetLoader
 {
-    public override void InstallBindings()
+    public class AdressablesAssetLoaderInstaller : Installer<AdressablesAssetLoaderInstaller>
     {
-        Container.Bind<IAddressablesAssetLoaderService>().To<AddressablesAssetLoaderService>().AsSingle();
+        public override void InstallBindings()
+        {
+            Container.Bind<IAddressablesAssetLoaderService>().To<AddressablesAssetLoaderService>().AsSingle();
+        }
     }
 }

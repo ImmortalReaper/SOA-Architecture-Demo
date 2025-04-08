@@ -1,4 +1,7 @@
-public interface ITickableCommand : ICommand
+namespace Feature.Commands
 {
-    public void Tick();
+    public interface ITickableCommand : ICommand
+    {
+        public void Tick();
+    }
 }

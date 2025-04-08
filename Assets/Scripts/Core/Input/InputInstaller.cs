@@ -2,17 +2,20 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-[CreateAssetMenu(menuName = "Configurations/InputModule/" + nameof(InputInstaller), fileName = nameof(InputInstaller) + "_Default", order = 0)]
-internal class InputInstaller : ScriptableObjectInstaller 
+namespace Core.Input
 {
-    [SerializeField] private InputActionAsset _inputActionAsset;
-        
-    public override void InstallBindings() 
+    [CreateAssetMenu(menuName = "Configurations/InputModule/" + nameof(InputInstaller), fileName = nameof(InputInstaller) + "_Default", order = 0)]
+    internal class InputInstaller : ScriptableObjectInstaller 
     {
-        Container.Bind<InputActionAsset>()
-            .FromInstance(_inputActionAsset)
-            .AsSingle();
+        [SerializeField] private InputActionAsset _inputActionAsset;
         
-        Container.BindInterfacesAndSelfTo<InputService>().AsSingle();
+        public override void InstallBindings() 
+        {
+            Container.Bind<InputActionAsset>()
+                .FromInstance(_inputActionAsset)
+                .AsSingle();
+        
+            Container.BindInterfacesAndSelfTo<InputService>().AsSingle();
+        }
     }
 }

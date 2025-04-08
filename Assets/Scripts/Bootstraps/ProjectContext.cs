@@ -1,11 +1,15 @@
+using Core.AssetLoader;
 using UnityEngine;
 using Zenject;
 
-[CreateAssetMenu(fileName = "ProjectContext", menuName = "Installers/ProjectContext")]
-public class ProjectContext : ScriptableObjectInstaller<ProjectContext>
+namespace Bootstraps
 {
-    public override void InstallBindings()
+    [CreateAssetMenu(fileName = "ProjectContext", menuName = "Installers/ProjectContext")]
+    public class ProjectContext : ScriptableObjectInstaller<ProjectContext>
     {
-        AdressablesAssetLoaderInstaller.Install(Container);
+        public override void InstallBindings()
+        {
+            AdressablesAssetLoaderInstaller.Install(Container);
+        }
     }
 }

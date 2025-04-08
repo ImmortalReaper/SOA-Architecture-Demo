@@ -1,4 +1,7 @@
-public interface IPlayerSpeedService
+namespace Feature.Player.Movement
 {
-    public void SetPlayerSpeed(float playerSpeed);
+    public interface IPlayerSpeedService
+    {
+        public void SetPlayerSpeed(float playerSpeed);
+    }
 }

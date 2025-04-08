@@ -1,19 +1,24 @@
-public class PlayerSpeedService : IPlayerSpeedService
-{
-    private readonly PlayerEntityModel _playerEntityModel;
-    private PlayerMovement _playerMovement;
-    
-    public PlayerSpeedService(PlayerEntityModel playerEntityModel)
-    {
-        _playerEntityModel = playerEntityModel;
-    }
+using Feature.PlayerData;
 
-    public void SetPlayerSpeed(float playerSpeed)
+namespace Feature.Player.Movement
+{
+    public class PlayerSpeedService : IPlayerSpeedService
     {
-        if(_playerEntityModel.PlayerEntity == null)
-            return;
+        private readonly PlayerEntityModel _playerEntityModel;
+        private PlayerMovement _playerMovement;
+    
+        public PlayerSpeedService(PlayerEntityModel playerEntityModel)
+        {
+            _playerEntityModel = playerEntityModel;
+        }
+
+        public void SetPlayerSpeed(float playerSpeed)
+        {
+            if(_playerEntityModel.PlayerEntity == null)
+                return;
         
-        _playerMovement ??= _playerEntityModel.PlayerEntity.GetComponent<PlayerMovement>();
-        _playerMovement.SetPlayerSpeed(playerSpeed);
+            _playerMovement ??= _playerEntityModel.PlayerEntity.GetComponent<PlayerMovement>();
+            _playerMovement.SetPlayerSpeed(playerSpeed);
+        }
     }
 }

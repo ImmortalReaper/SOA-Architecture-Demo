@@ -1,8 +1,13 @@
-public class CommandModuleInstaller : Installer<CommandModuleInstaller>
+using Core.Installer;
+
+namespace Feature.Commands
 {
-    public override void InstallBindings()
+    public class CommandModuleInstaller : Installer<CommandModuleInstaller>
     {
-        Container.BindInterfacesAndSelfTo<CommandQueue>().AsCached();
-        Container.BindInterfacesAndSelfTo<PlayerCommandHandler>().AsSingle();
+        public override void InstallBindings()
+        {
+            Container.BindInterfacesAndSelfTo<CommandQueue>().AsCached();
+            Container.BindInterfacesAndSelfTo<PlayerCommandHandler>().AsSingle();
+        }
     }
 }

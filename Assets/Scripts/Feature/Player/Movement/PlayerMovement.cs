@@ -1,39 +1,43 @@
+using Feature.PlayerData;
 using UnityEngine;
 using Zenject;
 
-public class PlayerMovement : MonoBehaviour
+namespace Feature.Player.Movement
 {
-    private float _speed;
-    private float _targetPointStopDistance;
-    private Vector3 _targetPosition;
-    private bool _isMoving = false;
-    
-    public bool IsMoving => _isMoving;
-    public float Speed => _speed;
-    
-    [Inject]
-    public void InjectDependencies(PlayerConfig playerConfig)
+    public class PlayerMovement : MonoBehaviour
     {
-        _speed = playerConfig.PlayerSpeed;
-        _targetPointStopDistance = playerConfig.PlayerTargetPointStopDistance;
-    }
+        private float _speed;
+        private float _targetPointStopDistance;
+        private Vector3 _targetPosition;
+        private bool _isMoving = false;
     
-    private void Update()
-    {
-        if (_isMoving)
+        public bool IsMoving => _isMoving;
+        public float Speed => _speed;
+    
+        [Inject]
+        public void InjectDependencies(PlayerConfig playerConfig)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _targetPosition, _speed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, _targetPosition) < _targetPointStopDistance)
-                _isMoving = false;
+            _speed = playerConfig.PlayerSpeed;
+            _targetPointStopDistance = playerConfig.PlayerTargetPointStopDistance;
         }
-    }
     
-    public void SetPlayerSpeed(float speed) => 
-        _speed = speed;
+        private void Update()
+        {
+            if (_isMoving)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, _targetPosition, _speed * Time.deltaTime);
+                if (Vector3.Distance(transform.position, _targetPosition) < _targetPointStopDistance)
+                    _isMoving = false;
+            }
+        }
     
-    public void MoveTo(Vector3 target)
-    {
-        _targetPosition = target;
-        _isMoving = true;
+        public void SetPlayerSpeed(float speed) => 
+            _speed = speed;
+    
+        public void MoveTo(Vector3 target)
+        {
+            _targetPosition = target;
+            _isMoving = true;
+        }
     }
 }

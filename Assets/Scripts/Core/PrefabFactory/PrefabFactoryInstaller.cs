@@ -1,7 +1,12 @@
-public class PrefabFactoryInstaller : Installer<PrefabFactoryInstaller>
+using Core.Installer;
+
+namespace Core.PrefabFactory
 {
-    public override void InstallBindings()
+    public class PrefabFactoryInstaller : Installer<PrefabFactoryInstaller>
     {
-        Container.Bind<IPrefabFactory>().To<PrefabsFactory>().AsSingle();
+        public override void InstallBindings()
+        {
+            Container.Bind<IPrefabFactory>().To<PrefabsFactory>().AsSingle();
+        }
     }
 }
